@@ -16,12 +16,6 @@ jobs:
           npm install
           npm run build
 
-      - name: Check if test-branch folder exists 🔧
-        run: |
-          if [[ ! -d "./gh-pages/test-branch" ]]; then
-            mkdir ./gh-pages/test-branch
-          fi
-
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
