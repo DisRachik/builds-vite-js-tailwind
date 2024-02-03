@@ -1,0 +1,29 @@
+name: Build and deploy to GitHub Pages
+
+on:
+ push:
+  branches: [test-branch]
+
+jobs:
+ build-and-deploy:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Checkout 🛎️
+    uses: actions/checkout@v2.3.1
+
+   - name: Install and build 🔧
+    run: |
+     npm install
+     npm run build
+
+   - name: Check if test-branch folder exists 🔧
+        run: |
+          if [[ ! -d "./gh-pages/test-branch" ]]; then
+            mkdir ./gh-pages/test-branch
+          fi
+
+   - name: Deploy 🚀
+    uses: JamesIves/github-pages-deploy-action@4.1.0
+    with:
+     branch: gh-pages/test-branch
+     folder: dist
