@@ -16,14 +16,21 @@ jobs:
           npm install
           npm run build
 
+      - name: Ensure gh-pages folder exists
+        run: mkdir -p gh-pages
+
       - name: Check if test-branch folder exists 🔧
         run: |
           if [[ ! -d "./gh-pages/test-branch" ]]; then
             mkdir ./gh-pages/test-branch
           fi
 
+      - name: Check if gh-pages branch exists
+        run: |
+          git fetch origin gh-pages:gh-pages
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
-          branch: gh-pages
+          branch: gh-pages/test-branch
           folder: dist
