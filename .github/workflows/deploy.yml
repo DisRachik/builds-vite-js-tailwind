@@ -2,7 +2,7 @@ name: Build and deploy to GitHub Pages
 
 on:
   push:
-    branches: [test-branch]
+    branches: [test-into-folder]
 
 jobs:
   build-and-deploy:
@@ -13,6 +13,7 @@ jobs:
 
       - name: Install and build 🔧
         run: |
+          cd test-into-folder
           npm install
           npm run build
 
@@ -21,4 +22,4 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
-          target-folder: test-branch
+          target-folder: test-into-folder
